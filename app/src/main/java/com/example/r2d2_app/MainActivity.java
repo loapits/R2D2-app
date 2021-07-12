@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class MainActivity extends Activity {
     private static final UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private ConnectedThred MyThred = null;
     public TextView mytext;
-    Button b0, b1, b2, b3, b4, b5, b6;
+    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11;
     boolean fl = false;
     Handler h;
     private StringBuilder sb = new StringBuilder();
@@ -42,6 +43,15 @@ public class MainActivity extends Activity {
             "Ха-ха!",
             "Ну что-о-о... Как дела?",
             "Привет, мой лучший друг!"
+    };
+
+    String[] moveQuotes = {
+            "RUN FOR YOUR LIIIIIVES!!!",
+            "Unts unts unts unts!",
+            "Unts unts unts unts!",
+            "Wheeeee!",
+            "Dangit, I'm out!",
+            "Health over here!"
     };
 
     @Override
@@ -71,10 +81,16 @@ public class MainActivity extends Activity {
         b4 = (Button) findViewById(R.id.b4);//Налево
         b5 = (Button) findViewById(R.id.b5);//Звук
         b6 = (Button) findViewById(R.id.b6);//Автоуправление
+        b7 = (Button) findViewById(R.id.b7);//Автоуправление
+        b8 = (Button) findViewById(R.id.b8);//Автоуправление
+        b9 = (Button) findViewById(R.id.b9);//Автоуправление
+        b10 = (Button) findViewById(R.id.b10);
+        b11 = (Button) findViewById(R.id.b11);
 
         b0.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("0");
+                mytext.setText(moveQuotes[4]);
                 if (fl) {
                     fl = false;
                     b1.setEnabled(true);
@@ -84,6 +100,11 @@ public class MainActivity extends Activity {
                     b5.setEnabled(true);
                     b5.setEnabled(true);
                     b6.setEnabled(true);
+                    b7.setEnabled(true);
+                    b8.setEnabled(true);
+                    b9.setEnabled(true);
+                    b10.setEnabled(true);
+                    b11.setEnabled(true);
                 }
             }
         });
@@ -91,30 +112,35 @@ public class MainActivity extends Activity {
         b1.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("1");
+                mytext.setText(moveQuotes[0]);
             }
         });
 
         b2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("2");
+                mytext.setText(moveQuotes[3]);
             }
         });
 
         b3.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("3");
+                mytext.setText(moveQuotes[1]);
             }
         });
 
         b4.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("4");
+                mytext.setText(moveQuotes[2]);
             }
         });
 
         b5.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("5");
+
                 int rand = (int) (Math.random() * messageStr.length);
                 String str = messageStr[rand];
                 mytext.setText("- R2D2: '" + str + "'");
@@ -124,8 +150,49 @@ public class MainActivity extends Activity {
         b6.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("6");
+                mytext.setText(moveQuotes[5]);
             }
         });
+
+        b7.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("7");
+                mytext.setText(moveQuotes[5]);
+            }
+        });
+
+        b8.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("8");
+                mytext.setText(moveQuotes[5]);
+            }
+        });
+
+        b9.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("9");
+                mytext.setText(moveQuotes[5]);
+            }
+        });
+
+        View.OnTouchListener btnTouchRight = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+
+                if (action == MotionEvent.ACTION_DOWN) {
+                    MyThred.sendData("10");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    MyThred.sendData("12");
+                }
+
+                return false;
+            }
+        };
+
+        b10.setOnTouchListener(spinHead("a"));
+        b11.setOnTouchListener(spinHead("b"));
+
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -137,18 +204,18 @@ public class MainActivity extends Activity {
                         int beginOfLineIndex = sb.indexOf("*");//определяем символы начала строки
                         int endOfLineIndex = sb.indexOf("#");//определяем символы конца строки
                         //Если блок данных соотвествует маске *данные# то выполняем код
+                        /*Log.d(LOG_TAG, "***Получаем данные: " + beginOfLineIndex + "***"  );
+                        Log.d(LOG_TAG, "***Получаем данные: " + endOfLineIndex + "***"  );
                         if ((endOfLineIndex > 0) && (beginOfLineIndex == 0)) { // если встречаем конец строки,
-                            String sbprint = sb.substring(beginOfLineIndex+1, endOfLineIndex-3); // то извлекаем строку
-                            mytext.setText("Данные от Arduino: " + sbprint);
-                            if (fl) {
-                                int dist = Integer.parseInt(sbprint);
-                                if (dist<50) {
-                                    MyThred.sendData("3");
-                                } else {
-                                    MyThred.sendData("1");
-                                }
+                            String sbprint = sb.substring(beginOfLineIndex, endOfLineIndex-3); // то извлекаем строку
+                            Log.d(LOG_TAG, "***Получаем данные: " + sbprint + "***"  );
+                            if (sbprint == "mes") {
+
+                            } else {
+                                int sbprintInt = Integer.parseInt(sbprint);
+
                             }
-                        }
+                        }*/
 
                         sb.delete(0, sb.length());
                         break;
@@ -156,6 +223,25 @@ public class MainActivity extends Activity {
                 }
             };
         };
+    }
+
+    public View.OnTouchListener spinHead(String side) {
+        View.OnTouchListener btnTouchLeft = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+
+                if (action == MotionEvent.ACTION_DOWN) {
+                    MyThred.sendData(side);
+                } else if (action == MotionEvent.ACTION_UP) {
+                    MyThred.sendData("c");
+                }
+
+                return false;
+            }
+        };
+
+        return btnTouchLeft;
     }
 
     @Override
