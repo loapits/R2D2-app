@@ -53,62 +53,15 @@ public class MainActivity extends Activity {
             "Dangit, I'm out!",
             "Health over here!"
     };
-    /*
-    * CRY
 
-    notes: 659, 587, 739, 659, 698, 1046, 830, 739, 1046, 830, 739,
-        932, 1318, 1108, 1396, 1661, 783, 1108, 1760, 1244, 2637,
-        1244, 880, 987, 1479, 1108, 1318, 2093, 932, 987, 1244, 1760,
-        1396, 1046, 1108, 1244, 2093, 1046, 1108, 3135, 1244, 3135,
-        987, 2093, 880, 1244, 1108, 2637, 1244, 698, 1174, 1046, 783,
-        739, 659, 622, 698, 783
+    String[] songsString = {
+        "first.wav",
+        "second.wav",
+        "third.wav",
+        "fourth.wav",
+        "fifth.wav"
+    };
 
-    duration:  9, 26, 26, 9, 9, 9, 9, 9, 9, 9, 9, 17, 9, 17, 9, 9,
-        9, 9, 9, 17, 9, 9, 9, 17, 9, 9, 17, 9, 17, 17, 9, 9,
-        17, 9, 9, 26, 9, 9, 9, 9, 9, 61, 9, 9, 9, 9, 9, 9, 9,
-        9, 9, 9, 17, 9, 9, 9, 17
-
-    delay: 20, 39, 29, 78, 10, 10, 10, 30, 10, 10, 10, 10, 29, 10,
-        49, 10, 10, 30, 69, 30, 19, 10, 10, 20, 19, 10, 10, 77,
-        10, 29, 19, 10, 10, 48, 20, 49, 29, 30, 30, 30, 10, 20,
-        117, 10, 20, 10, 20, 60, 10, 10, 10, 10, 40, 117, 10, 10,
-        10, 19
-    --------------------------------------------------------------------------
-
-    R2D2Question
-
-    notes: 2793, 3135, 1864, 1661, 1479, 1567, 1661, 1760, 1864, 1975, 2093, 2217, 2349, 2489, 2959, 2637, 2637, 2793, 2959, 2489, 2959, 2793, 1864, 1760, 1864, 1975, 2093, 2217, 2349, 2489, 2637, 2793, 2959, 3135
-    duration:  17, 17, 9, 96, 17, 35, 9, 17, 17, 9, 9, 9, 9, 9, 26, 35, 35, 17, 17, 26, 9, 9, 17, 235, 17, 26, 44, 26, 26, 9, 17, 17, 26, 70
-    delay: 19, 65, 10, 349, 19, 39, 10, 19, 19, 10, 10, 10, 10, 38, 29, 47, 47, 19, 330, 29, 105, 46, 19, 262, 19, 29, 48, 29, 49, 10, 19, 19, 29, 78
-    --------------------------------------------------------------------------
-
-    Surprise
-
-    notes: 233, 246, 277, 293, 349, 391, 440, 493, 1479, 1567, 1864, 2093, 2489, 739, 880, 659, 830, 880, 932, 783, 2793, 880, 1108, 1396, 1174, 1244, 1396, 1479, 1864, 2217, 2349, 2793, 2489, 987, 932
-    duration:  9, 9, 9, 9, 9, 9, 9, 9, 17, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
-    delay: 10, 10, 10, 10, 10, 10, 10, 39, 19, 20, 10, 10, 58, 20, 10, 10, 10, 20, 10, 10, 10, 59, 10, 10, 10, 10, 10, 10, 10, 10, 10, 118, 50, 10, 10
-    --------------------------------------------------------------------------
-
-    QuoteThree
-
-    notes: 1760, 1864, 1975, 2489, 2349, 1396, 1174, 1108, 1479, 2637, 1864, 415, 554, 622, 739, 440, 987, 1046, 739, 698, 987, 1174, 1864, 523, 698, 1174, 1661, 1479, 1760, 2217, 3135, 2217, 523, 1760, 2349, 1318, 1864, 2637, 2489, 1760, 1567
-    duration:  17, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 17, 9, 17, 9, 9, 9, 9, 17, 35, 26, 9, 9, 9, 9, 9, 9, 9, 9
-    delay:  19, 10, 10, 10, 59, 10, 10, 156, 10, 98, 10, 49, 10, 20, 10, 10, 29, 20, 20, 10, 10, 10, 117, 19, 39, 19, 10, 10, 10, 10, 49, 49, 29, 10, 10, 10, 10, 10, 68, 10, 10
-    --------------------------------------------------------------------------
-
-    Offer
-
-    notes: 174, 554, 184, 195, 207, 233, 293, 233, 369, 440, 493, 554, 622, 698, 783, 1396, 1174, 1318, 1661, 1760, 2093, 2349, 2637, 2793, 2959, 3135, 1975, 1174, 554, 2217, 659, 783
-    duration:   9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 17, 9, 9, 9, 9, 35, 9, 9, 9
-    delay: 10, 10, 10, 10, 10, 20, 10, 10, 10, 20, 10, 10, 10, 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 19, 10, 380, 20, 90, 39, 10, 10, 10
-    --------------------------------------------------------------------------
-
-    Broken
-
-    notes: 1174, 1760, 987, 1661, 2793, 554, 587, 523, 2637, 2793, 1108, 523, 783, 493, 783, 1108, 1174, 493, 523, 207, 1046, 1108, 220
-    duration:  9, 9, 9, 17, 17, 9, 9, 26, 9, 148, 9, 9, 9, 17, 9, 26, 26, 26, 26, 17, 17, 61, 9
-    delay: 10, 10, 10, 19, 19, 49, 89, 29, 10, 204, 10, 10, 49, 19, 10, 107, 39, 29, 87, 19, 19, 68, 10
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +82,7 @@ public class MainActivity extends Activity {
             MyError("Fatal Error", "Bluetooth ОТСУТСТВУЕТ");
         }
 
+        b0 = (Button) findViewById(R.id.b0);
         b1 = (Button) findViewById(R.id.b1);
         b2 = (Button) findViewById(R.id.b2);
         b3 = (Button) findViewById(R.id.b3);
@@ -193,9 +147,8 @@ public class MainActivity extends Activity {
 
         b5.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                MyThred.sendData("5");
-
                 int rand = (int) (Math.random() * messageStr.length);
+                MyThred.sendData(songsString[rand]);
                 String str = messageStr[rand];
                 mytext.setText("- R2D2: '" + str + "'");
             }
@@ -203,8 +156,7 @@ public class MainActivity extends Activity {
 
         b6.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                MyThred.sendData("6");
-                mytext.setText(moveQuotes[5]);
+                onResume();
             }
         });
 
@@ -229,24 +181,17 @@ public class MainActivity extends Activity {
             }
         });
 
-        View.OnTouchListener btnTouchRight = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-
-                if (action == MotionEvent.ACTION_DOWN) {
-                    MyThred.sendData("10");
-                } else if (action == MotionEvent.ACTION_UP) {
-                    MyThred.sendData("12");
-                }
-
-                return false;
+        b10.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("a");
             }
-        };
+        });
 
-        b10.setOnTouchListener(spinHead("a"));
-        b11.setOnTouchListener(spinHead("b"));
-
+        b11.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("b");
+            }
+        });
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -255,47 +200,14 @@ public class MainActivity extends Activity {
                         byte[] readBuf = (byte[]) msg.obj;
                         String strIncom = new String(readBuf, 0, msg.arg1);
                         sb.append(strIncom);// формируем строку
-                        int beginOfLineIndex = sb.indexOf("*");//определяем символы начала строки
-                        int endOfLineIndex = sb.indexOf("#");//определяем символы конца строки
-                        //Если блок данных соотвествует маске *данные# то выполняем код
-                        /*Log.d(LOG_TAG, "***Получаем данные: " + beginOfLineIndex + "***"  );
-                        Log.d(LOG_TAG, "***Получаем данные: " + endOfLineIndex + "***"  );
-                        if ((endOfLineIndex > 0) && (beginOfLineIndex == 0)) { // если встречаем конец строки,
-                            String sbprint = sb.substring(beginOfLineIndex, endOfLineIndex-3); // то извлекаем строку
-                            Log.d(LOG_TAG, "***Получаем данные: " + sbprint + "***"  );
-                            if (sbprint == "mes") {
-
-                            } else {
-                                int sbprintInt = Integer.parseInt(sbprint);
-
-                            }
-                        }*/
-
+                        int beginOfLineIndex = sb.indexOf("*");
+                        int endOfLineIndex = sb.indexOf("#");
                         sb.delete(0, sb.length());
                         break;
                     }
                 }
             };
         };
-    }
-
-    public View.OnTouchListener spinHead(String side) {
-        View.OnTouchListener btnTouchLeft = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-
-                if (action == MotionEvent.ACTION_DOWN) {
-                    MyThred.sendData(side);
-                } else if (action == MotionEvent.ACTION_UP) {
-                    MyThred.sendData("c");
-                }
-
-                return false;
-            }
-        };
-
-        return btnTouchLeft;
     }
 
     @Override
