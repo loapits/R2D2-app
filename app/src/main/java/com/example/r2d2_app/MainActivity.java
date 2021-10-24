@@ -22,6 +22,7 @@ import android.widget.Toast;
 import android.bluetooth.*;
 import android.content.Intent;
 
+
 public class MainActivity extends Activity {
     private static final int REQUEST_ENABLE_BT = 1;
     final int ArduinoData = 1;
@@ -32,10 +33,13 @@ public class MainActivity extends Activity {
     private static final UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private ConnectedThred MyThred = null;
     public TextView mytext;
-    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11;
+    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12;
     boolean fl = false;
     Handler h;
     private StringBuilder sb = new StringBuilder();
+
+
+
     String[] messageStr = {
             "Ага... я понял твою задумку.",
             "Я написал песенку в стиле даб-степ. Хочешь послушать?",
@@ -59,7 +63,8 @@ public class MainActivity extends Activity {
         "second.wav",
         "third.wav",
         "fourth.wav",
-        "fifth.wav"
+        "fifth.wav",
+        "six.wav"
     };
 
     @Override
@@ -94,6 +99,7 @@ public class MainActivity extends Activity {
         b9 = (Button) findViewById(R.id.b9);
         b10 = (Button) findViewById(R.id.b10);
         b11 = (Button) findViewById(R.id.b11);
+        b12 = (Button) findViewById(R.id.b12);
 
         b0.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -113,6 +119,7 @@ public class MainActivity extends Activity {
                     b9.setEnabled(true);
                     b10.setEnabled(true);
                     b11.setEnabled(true);
+                    b12.setEnabled(true);
                 }
             }
         });
@@ -184,12 +191,21 @@ public class MainActivity extends Activity {
         b10.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("a");
+                mytext.setText(moveQuotes[5]);
             }
         });
 
         b11.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 MyThred.sendData("b");
+                mytext.setText(moveQuotes[5]);
+            }
+        });
+
+        b12.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                MyThred.sendData("c");
+                mytext.setText(moveQuotes[4]);
             }
         });
 
@@ -217,26 +233,31 @@ public class MainActivity extends Activity {
             if (btAdapter.isEnabled()) {
                 BluetoothDevice device = btAdapter.getRemoteDevice(MacAddress);
                 Log.d(LOG_TAG, "***Получили удаленный Device***"+device.getName());
+                mytext.setText("Получили удаленный Device: "+device.getName());
 
                 try {
                     btSocket = device.createRfcommSocketToServiceRecord(BT_UUID);
                     Log.d(LOG_TAG, "...Создали сокет...");
                 } catch (IOException e) {
                     MyError("Fatal Error", "В onResume() Не могу создать сокет: " + e.getMessage() + ".");
+                    mytext.setText("В onResume() Не могу создать сокет: " + e.getMessage() + ".");
                 }
 
                 btAdapter.cancelDiscovery();
                 Log.d(LOG_TAG, "***Отменили поиск других устройств***");
                 Log.d(LOG_TAG, "***Соединяемся...***");
+                mytext.setText("Соединяемся...");
 
                 try {
                     btSocket.connect();
                     Log.d(LOG_TAG, "***Соединение успешно установлено***");
+                    mytext.setText("Соединение успешно установлено.");
                 } catch (IOException e) {
                     try {
                         btSocket.close();
                     } catch (IOException e2) {
                         MyError("Fatal Error", "В onResume() не могу закрыть сокет" + e2.getMessage() + ".");
+                        mytext.setText("В onResume() не могу закрыть сокет" + e2.getMessage() + ".");
                     }
                 }
 
@@ -268,9 +289,9 @@ public class MainActivity extends Activity {
 
     private void MyError(String title, String message) {
         Toast.makeText(getBaseContext(), title + " - " + message, Toast.LENGTH_LONG).show();
+        mytext.setText("Fatal Error!" + message);
         finish();
     }
-
 
     //Отдельный поток для передачи данных
     private class ConnectedThred extends Thread {
@@ -282,10 +303,13 @@ public class MainActivity extends Activity {
             copyBtSocket = socket;
             OutputStream tmpOut = null;
             InputStream tmpIn = null;
+
             try {
                 tmpOut = socket.getOutputStream();
                 tmpIn = socket.getInputStream();
-            } catch (IOException e) {}
+            } catch (IOException e) {
+                mytext.setText("Не получилось передать данные на BT");
+            }
 
             OutStrem = tmpOut;
             InStrem = tmpIn;
@@ -320,6 +344,7 @@ public class MainActivity extends Activity {
             try {
                 copyBtSocket.close();
             } catch(IOException e) {}
+            mytext.setText("Not connected");
         }
 
         public Object status_OutStrem() {

@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/txtrobot"
-            android:layout_width="657dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
             android:paddingLeft="10dp"
@@ -25,20 +25,6 @@
             android:textColor="#ff6"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtrobot3"
-            android:layout_width="611dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:text="100%"
-            android:textAllCaps="false"
-            android:textColor="#ff6"
-            android:textSize="16sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -106,7 +92,7 @@
 
                 <Button
                     android:id="@+id/b5"
-                    android:layout_width="150dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
@@ -115,7 +101,7 @@
                     android:layout_marginRight="50dp"
                     android:layout_weight="0"
                     android:background="#00293D82"
-                    android:text="♫"
+                    android:text="🎙"
                     android:textSize="70px" />
 
             </LinearLayout>
@@ -201,19 +187,37 @@
         android:layout_height="136dp">
 
         <LinearLayout
-            android:layout_width="421dp"
-            android:layout_height="136dp"
+            android:layout_width="590dp"
+            android:layout_height="match_parent"
             android:layout_weight="100">
 
             <Button
                 android:id="@+id/b0"
+                android:layout_width="75dp"
+                android:layout_height="150px"
+                android:layout_gravity="center"
+                android:layout_margin="100px"
+                android:layout_weight="0"
+                android:background="#00293D82"
+                android:text="📛"
+                android:textSize="70px" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_weight="100">
+
+            <Button
+                android:id="@+id/b12"
                 android:layout_width="200px"
                 android:layout_height="150px"
                 android:layout_gravity="center"
                 android:layout_margin="100px"
                 android:layout_weight="0"
                 android:background="#00293D82"
-                android:text="■"
+                android:text="🚫"
                 android:textSize="70px" />
 
         </LinearLayout>
