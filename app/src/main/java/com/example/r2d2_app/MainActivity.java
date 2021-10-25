@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.UUID;
 
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import android.bluetooth.*;
 import android.content.Intent;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends Activity {
     private static final int REQUEST_ENABLE_BT = 1;
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
     private ConnectedThred MyThred = null;
     public TextView mytext;
     Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12;
+    MediaPlayer evric, cry, horrify, outranged, processing, pround, smile, squeaks, story, worry;
     boolean fl = false;
     Handler h;
     private StringBuilder sb = new StringBuilder();
@@ -58,20 +61,21 @@ public class MainActivity extends Activity {
             "Health over here!"
     };
 
-    String[] songsString = {
-        "first.wav",
-        "second.wav",
-        "third.wav",
-        "fourth.wav",
-        "fifth.wav",
-        "six.wav"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        evric = MediaPlayer.create(this, R.raw.evric);
+        cry = MediaPlayer.create(this, R.raw.cry);
+        horrify = MediaPlayer.create(this, R.raw.horrify);
+        outranged = MediaPlayer.create(this, R.raw.outraged);
+        processing = MediaPlayer.create(this, R.raw.processing);
+        pround = MediaPlayer.create(this, R.raw.proud);
+        smile = MediaPlayer.create(this, R.raw.smile);
+        squeaks = MediaPlayer.create(this, R.raw.squeaks);
+        story = MediaPlayer.create(this, R.raw.story);
+        worry = MediaPlayer.create(this, R.raw.worry);
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         mytext = (TextView) findViewById(R.id.txtrobot);
@@ -121,6 +125,7 @@ public class MainActivity extends Activity {
                     b11.setEnabled(true);
                     b12.setEnabled(true);
                 }
+                horrify.start();
             }
         });
 
@@ -128,6 +133,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("1");
                 mytext.setText(moveQuotes[0]);
+                smile.start();
             }
         });
 
@@ -135,6 +141,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("2");
                 mytext.setText(moveQuotes[3]);
+                cry.start();
             }
         });
 
@@ -142,6 +149,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("3");
                 mytext.setText(moveQuotes[1]);
+                outranged.start();
             }
         });
 
@@ -149,21 +157,23 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("4");
                 mytext.setText(moveQuotes[2]);
+                outranged.start();
             }
         });
 
         b5.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 int rand = (int) (Math.random() * messageStr.length);
-                MyThred.sendData(songsString[rand]);
                 String str = messageStr[rand];
                 mytext.setText("- R2D2: '" + str + "'");
+                story.start();
             }
         });
 
         b6.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 onResume();
+                processing.start();
             }
         });
 
@@ -171,6 +181,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("7");
                 mytext.setText(moveQuotes[5]);
+                squeaks.start();
             }
         });
 
@@ -178,6 +189,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("8");
                 mytext.setText(moveQuotes[5]);
+                squeaks.start();
             }
         });
 
@@ -185,6 +197,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("9");
                 mytext.setText(moveQuotes[5]);
+                evric.start();
             }
         });
 
@@ -192,6 +205,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("a");
                 mytext.setText(moveQuotes[5]);
+                pround.start();
             }
         });
 
@@ -199,6 +213,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("b");
                 mytext.setText(moveQuotes[5]);
+                pround.start();
             }
         });
 
@@ -206,6 +221,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 MyThred.sendData("c");
                 mytext.setText(moveQuotes[4]);
+                worry.start();
             }
         });
 
@@ -229,6 +245,7 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
+
         if (btAdapter != null) {
             if (btAdapter.isEnabled()) {
                 BluetoothDevice device = btAdapter.getRemoteDevice(MacAddress);
@@ -285,7 +302,7 @@ public class MainActivity extends Activity {
                 }
             }
         }
-    }//OnPause
+    }
 
     private void MyError(String title, String message) {
         Toast.makeText(getBaseContext(), title + " - " + message, Toast.LENGTH_LONG).show();
@@ -315,8 +332,7 @@ public class MainActivity extends Activity {
             InStrem = tmpIn;
         }
 
-        public void run()
-        {
+        public void run() {
             byte[] buffer = new byte[1024];
             int bytes;
 
@@ -344,6 +360,7 @@ public class MainActivity extends Activity {
             try {
                 copyBtSocket.close();
             } catch(IOException e) {}
+
             mytext.setText("Not connected");
         }
 
