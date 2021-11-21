@@ -209,17 +209,6 @@
             android:layout_height="match_parent"
             android:layout_weight="100">
 
-            <Button
-                android:id="@+id/b12"
-                android:layout_width="200px"
-                android:layout_height="150px"
-                android:layout_gravity="center"
-                android:layout_margin="100px"
-                android:layout_weight="0"
-                android:background="#00293D82"
-                android:text="🚫"
-                android:textSize="70px" />
-
         </LinearLayout>
 
         <LinearLayout

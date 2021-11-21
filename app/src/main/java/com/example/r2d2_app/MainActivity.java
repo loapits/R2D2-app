@@ -35,30 +35,29 @@ public class MainActivity extends Activity {
     private static final UUID BT_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private ConnectedThred MyThred = null;
     public TextView mytext;
-    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12;
+    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11;
     MediaPlayer evric, cry, horrify, outranged, processing, pround, smile, squeaks, story, worry;
     boolean fl = false;
+
     Handler h;
     private StringBuilder sb = new StringBuilder();
 
-
-
     String[] messageStr = {
-            "Ага... я понял твою задумку.",
-            "Я написал песенку в стиле даб-степ. Хочешь послушать?",
-            "Унц-унц-унц...",
-            "Ха-ха!",
-            "Ну что-о-о... Как дела?",
-            "Привет, мой лучший друг!"
+        "Ага... я понял твою задумку.",
+        "Я написал песенку в стиле даб-степ. Хочешь послушать?",
+        "Унц-унц-унц...",
+        "Ха-ха!",
+        "Ну что-о-о... Как дела?",
+        "Привет, мой лучший друг!"
     };
 
     String[] moveQuotes = {
-            "RUN FOR YOUR LIIIIIVES!!!",
-            "Unts unts unts unts!",
-            "Unts unts unts unts!",
-            "Wheeeee!",
-            "Dangit, I'm out!",
-            "Health over here!"
+        "RUN FOR YOUR LIIIIIVES!!!",
+        "Unts unts unts unts!",
+        "Unts unts unts unts!",
+        "Wheeeee!",
+        "Dangit, I'm out!",
+        "Health over here!"
     };
 
     @Override
@@ -103,7 +102,6 @@ public class MainActivity extends Activity {
         b9 = (Button) findViewById(R.id.b9);
         b10 = (Button) findViewById(R.id.b10);
         b11 = (Button) findViewById(R.id.b11);
-        b12 = (Button) findViewById(R.id.b12);
 
         b0.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -123,7 +121,6 @@ public class MainActivity extends Activity {
                     b9.setEnabled(true);
                     b10.setEnabled(true);
                     b11.setEnabled(true);
-                    b12.setEnabled(true);
                 }
                 horrify.start();
             }
@@ -214,14 +211,6 @@ public class MainActivity extends Activity {
                 MyThred.sendData("b");
                 mytext.setText(moveQuotes[5]);
                 pround.start();
-            }
-        });
-
-        b12.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                MyThred.sendData("c");
-                mytext.setText(moveQuotes[4]);
-                worry.start();
             }
         });
 
@@ -344,7 +333,6 @@ public class MainActivity extends Activity {
                     break;
                 }
             }
-
         }
 
         public void sendData(String message) {
@@ -367,7 +355,9 @@ public class MainActivity extends Activity {
         public Object status_OutStrem() {
             if (OutStrem == null) {
                 return null;
-            } else {return OutStrem;}
+            } else {
+                return OutStrem;
+            }
         }
     }
 }
